@@ -28,6 +28,9 @@ WHERE countrycode = 'VAT' AND isofficial = TRUE;
 
 -- Write SQL query here
 
+SELECT countries.name FROM countrylanguages
+JOIN countries ON countrylanguages.countrycode = countries.code
+WHERE percentage = 100 AND language = 'Italian';
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time. 
 --There are only two cities she could be flying to in the country. One is named the same as the country that 
@@ -36,6 +39,11 @@ WHERE countrycode = 'VAT' AND isofficial = TRUE;
 
 -- Write SQL query here
 
+SELECT cities.name 
+FROM cities
+JOIN countries ON cities.countrycode = countries.code
+WHERE countries.name = 'San Marino'
+  AND LOWER(cities.name) != LOWER(countries.name);
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different 
 --parts of the globe! She's headed to South America as we speak; go find a city whose name is like the one we were 
